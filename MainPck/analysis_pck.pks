@@ -6,12 +6,11 @@ procedure WriteFile_pr( message varchar, quantil number);
 
 procedure Analyse_pr;
 
-FUNCTION split_genre return nomId_tab;
-FUNCTION split_directors return nomId_tab;
-/*function quantil_max return number (mot varchar);
- */
- 
- 
+FUNCTION split_genre_fc return nomId_tab;
+FUNCTION split_director_fc return nomId_tab;
+FUNCTION split_actor_fc return nomId_tab;
+
+PROCEDURE print_status_pr;
  
  
  
