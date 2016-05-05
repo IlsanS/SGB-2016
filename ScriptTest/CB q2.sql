@@ -28,6 +28,29 @@ select nom,id  from table( ANALYSIS_PCK.split_directors);
 /
 
 /
-select status from movies_ext where rownum<25
+select vote_count from movies_ext where rownum<25
 ;
+select distinct certification from movies_ext where regexp_instr(certification,'[^0-9]') <>0 
+                                              and certification <>'None' 
+                                              and certification<>'-' 
+                                              and certification <> ' '
+;
+/
+begin 
+  ANALYSIS_PCK.ANAlyse_pr;
+  end;
 
+/ 
+Select avg(runtime),max(runtime), min(runtime) from  movies_ext;
+select count(*) from movies_ext where runtime=0;
+/
+Select avg(vote_average),max(vote_average), min(vote_average) from  movies_ext;
+select vote_average from movies_ext where vote_average=0;
+/
+
+Select * from  movies_ext where budget <=0;
+select vote_average from movies_ext where vote_average=0;
+
+/
+select actors from movies_ext where rownum <5;
+/
