@@ -1,3 +1,21 @@
+drop table "CB".movie cascade constraints PURGE;
+drop table "CB".artist cascade constraints PURGE;
+drop table "CB".director cascade constraints PURGE;
+drop table "CB".certification cascade constraints PURGE;
+drop table "CB".copy cascade constraints PURGE;
+drop table "CB".status cascade constraints PURGE;
+
+drop table "CB".play cascade constraints PURGE;
+drop table "CB".direct cascade constraints PURGE;
+drop table "CB".genre_movie cascade constraints PURGE;
+drop table "CB".cert_movie cascade constraints PURGE;
+drop table "CB".status_movie cascade constraints PURGE;
+
+
+
+
+
+
 -- ###############################
 -- # CREATE TABLE USER
 -- ###############################
@@ -127,6 +145,17 @@ CREATE TABLE artist
 	id				number(7),
 	name			VARCHAR2(30),
 	CONSTRAINT	nn_name_artist			CHECK(name IS NOT NULL),
+	CONSTRAINT  pk_artist				PRIMARY KEY(id)
+);
+/
+-- ###############################
+-- # CREATE TABLE ARTIST
+-- ###############################
+CREATE TABLE director
+(
+	id				number(7),
+	name			VARCHAR2(30),
+	CONSTRAINT	nn_name_director			CHECK(name IS NOT NULL),
 	CONSTRAINT  pk_artist				PRIMARY KEY(id)
 );
 /

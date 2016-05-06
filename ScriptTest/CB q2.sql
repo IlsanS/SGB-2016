@@ -8,7 +8,7 @@
             FROM Split
             WHERE endpos > 0
     )
-    SELECT distinct  regexp_substr(substr(genre,stpos,COALESCE(NULLIF(endpos,0),LENGTH(genre)+1)-stpos),'[A-Z �/-/.]+',1,1)
+    SELECT distinct  regexp_substr(substr(genre,stpos,COALESCE(NULLIF(endpos,0),LENGTH(genre)+1)-stpos),'[A-Z �/-/.]+',1,1)
 FROM Split;
 
 /
@@ -52,5 +52,21 @@ Select * from  movies_ext where budget <=0;
 select vote_average from movies_ext where vote_average=0;
 
 /
-select actors from movies_ext where rownum <5;
+select * from movies_ext where rownum <5;
 /
+begin
+	 WITH Split(genre,stpos,endpos)
+	  	AS(
+	        SELECT 'Harnos‖105988„Galyn Görg‖22621„Angela Alvarado‖10822„Stephen Dorff  ', 0 AS stpos,  REGEXP_INSTR('Harnos‖105988„Galyn Görg‖22621„Angela Alvarado‖10822„Stephen Dorff  ','‖')   AS endpos from dual 
+	        UNION ALL
+	        SELECT genre, endpos+1,  REGEXP_INSTR(genre,'‖',endpos+1)
+	            FROM Split
+	   	         WHERE endpos > 0
+	   	 )
+
+	    SELECT  distinct (regexp_substr(substr(genre,stpos,COALESCE(NULLIF(endpos,0),LENGTH(genre)+1)-stpos),'[A-Z /. /-/öä]+',1,1)) as name ,
+		(regexp_substr(substr(genre,stpos,COALESCE(NULLIF(endpos,0),LENGTH(genre)+1)-stpos),'[0-9]+',1,1)) as id
+	    FROM Split  ;
+  end;
+
+select * from movies_ext where rownum<7;
