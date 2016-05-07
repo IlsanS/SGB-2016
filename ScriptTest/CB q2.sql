@@ -69,4 +69,21 @@ begin
 	    FROM Split  ;
   end;
 
-select * from movies_ext where rownum<7;
+select * from movies_ext where id = 5;
+
+/
+begin
+ALIMCB_PKG.ALIMMOVIEByn_pr(15);
+end;
+
+/
+select* from cert_movie;
+select * from movies_ext where id = 10048;
+select*from artist;
+select * from play;
+select * from direct;
+select name, title from artist, movie, direct where id_movie=movie.id and id_director=artist.id;
+select * from genre;
+/
+select * from movies_ext where rownum <20;
+

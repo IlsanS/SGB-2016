@@ -1,9 +1,10 @@
 drop table "CB".movie cascade constraints PURGE;
 drop table "CB".artist cascade constraints PURGE;
-drop table "CB".director cascade constraints PURGE;
 drop table "CB".certification cascade constraints PURGE;
 drop table "CB".copy cascade constraints PURGE;
 drop table "CB".status cascade constraints PURGE;
+drop table "CB".genre cascade constraints PURGE;
+
 
 drop table "CB".play cascade constraints PURGE;
 drop table "CB".direct cascade constraints PURGE;
@@ -128,12 +129,21 @@ create table movie(
 
 CREATE TABLE certification
 (
-	id 				varchar(5),
-	name 			VARCHAR(30),
-	description		VARCHAR2(1000),
-	CONSTRAINT	nn_name_cert			CHECK(name IS NOT NULL),
-	CONSTRAINT  pk_cert					PRIMARY KEY(id)
+	id 				varchar(6),
+	name 			VARCHAR(50),
+	description		VARCHAR2(500),
+	CONSTRAINT  ck_cert_id			CHECK (id in ('G', 'PG', 'PG-13', 'R', 'NC-17')),
+	CONSTRAINT	nn_name_cert		CHECK(name IS NOT NULL),
+	CONSTRAINT  pk_cert				PRIMARY KEY(id)
 );
+/
+
+INSERT into certification values('G', 'General Audiences', 'Nothing that would offend parents for viewing by children.');
+INSERT into certification values('PG', 'Parental guidance suggested', 'Parents urged to give parental guidance.');
+INSERT into certification values('PG-13', 'Parent strongly cautioned', 'Parents are urged to be cautious. Some material may be innapropriate for pre-teen.');
+INSERT into certification values('R', 'Restricted', 'Parents are urged to be cautious. Some material may be innapropriate for pre-teen.');
+INSERT into certification values('NC-17', 'No one 17 and under admitted', 'Clrearly adult. Childre are not admitted.');
+COMMIT
 /
 
 
@@ -145,17 +155,6 @@ CREATE TABLE artist
 	id				number(7),
 	name			VARCHAR2(30),
 	CONSTRAINT	nn_name_artist			CHECK(name IS NOT NULL),
-	CONSTRAINT  pk_artist				PRIMARY KEY(id)
-);
-/
--- ###############################
--- # CREATE TABLE ARTIST
--- ###############################
-CREATE TABLE director
-(
-	id				number(7),
-	name			VARCHAR2(30),
-	CONSTRAINT	nn_name_director			CHECK(name IS NOT NULL),
 	CONSTRAINT  pk_artist				PRIMARY KEY(id)
 );
 /
@@ -278,7 +277,10 @@ CREATE TABLE status_movie
 COMMIT;
 
 
-	
+
+
+
+
 	
 	
 	
