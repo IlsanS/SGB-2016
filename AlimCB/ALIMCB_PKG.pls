@@ -19,7 +19,7 @@ BEGIN
 			runtime,
 			budget,	
 			filter_tagline_fc(tagline),
-			null,--get_blob_fc(poster_path),
+			get_blob_fc(poster_path),
 			0
 			FROM movies_ext where id=movie_id;
 
